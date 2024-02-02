@@ -1,3 +1,4 @@
 from p5 import *
 
-#lol
+def setup():
+    pass
