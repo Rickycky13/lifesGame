@@ -1,11 +1,23 @@
 from p5 import *
 
 def setup():
-    global plan
+    global cellule
     size(800,800)
-    plan = [[]]
+    fill(0)
+    cellule = []
 
 
+def draw():
+    global cellule
+    background(255)
+    for i in range(len(cellule)):
+        rect(cellule[i][0],cellule[i][1],50,50)
+
+def mouse_pressed():
+    global cellule
+    cellule_x = (mouse_x//50) * 50
+    cellule_y = (mouse_y//50) * 50
+    cellule.append((cellule_x,cellule_y))
 
 
 run()
