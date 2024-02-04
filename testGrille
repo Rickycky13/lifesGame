@@ -10,14 +10,20 @@ def setup():
 def draw():
     global cellule
     background(255)
+    fill(0,255,0)
+    rect(multProche(mouse_x,50),multProche(mouse_y,50),50,50)
     for i in range(len(cellule)):
+        fill(0)
         rect(cellule[i][0],cellule[i][1],50,50)
 
 def mouse_pressed():
     global cellule
-    cellule_x = (mouse_x//50) * 50
-    cellule_y = (mouse_y//50) * 50
-    cellule.append((cellule_x,cellule_y))
+    cellule.append((multProche(mouse_x,50),multProche(mouse_y,50)))
 
+def multProche(val,mult):
+    return (val//mult) * mult
+
+def evolution():
+    pass
 
 run()
