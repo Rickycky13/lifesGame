@@ -1,4 +1,0 @@
-from p5 import *
-
-def setup():
-    pass
