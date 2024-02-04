@@ -24,6 +24,7 @@ def multProche(val,mult):
     return (val//mult) * mult
 
 def evolution():
+    """ fonction a activer dans draw qui s'occupe de toute l'évolution avec les trois règles"""
     pass
 
 run()
