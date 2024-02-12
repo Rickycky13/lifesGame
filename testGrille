@@ -11,21 +11,38 @@ def draw():
     global celluleVivante
     background(255)
     fill(0,255,0)
-    rect(multProche(mouse_x,50),multProche(mouse_y,50),50,50)
+    rect(multProche(mouse_x,25),multProche(mouse_y,25),25,25)
     for i in range(len(celluleVivante)):
         fill(0)
-        rect(celluleVivante[i][0],celluleVivante[i][1],50,50)
+        rect(celluleVivante[i][0],celluleVivante[i][1],25,25)
+    
+    evolution()
 
 def mouse_pressed():
     global celluleVivante
-    celluleVivante.append((multProche(mouse_x,50),multProche(mouse_y,50)))
+    celluleVivante.append((multProche(mouse_x,25),multProche(mouse_y,25)))
 
 def multProche(val,mult):
     return (val//mult) * mult
 
+def add8voisins(pos,dict):
+    dict[(multProche(pos[0],25)+25,multProche(pos[i],25))] += 1
+
 def evolution():
+    global celluleVivante
     """ fonction a activer dans draw qui s'occupe de toute l'évolution avec les trois règles"""
+    fill(0,0,255)
+    rect(0,0,50,50)
+    cellule2 = {}
     if mouse_is_pressed:
-        pass
+        if 0 <= mouse_x <= 50 and 0 <= mouse_y <= 50:
+            celluleVivante = []
+            for i in range(len(celluleVivante)):
+                 add8voisins(i,cellule2)
+                 print(cellule2)
+            for keys in cellule2:
+                print("b")
+                print(keys)
+                celluleVivante.append(keys)
 
 run()
