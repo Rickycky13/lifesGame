@@ -50,8 +50,8 @@ def rules(dict,cellule):
     return lst
 
 def evolution():
-    global celluleVivante, voisins
     """ fonction a activer dans draw qui s'occupe de toute l'évolution avec les trois règles"""
+    global celluleVivante, voisins
     voisins = []
     for i in range(len(celluleVivante)):
         add8voisins(celluleVivante[i])
