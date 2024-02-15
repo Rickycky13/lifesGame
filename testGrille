@@ -1,6 +1,6 @@
 from p5 import *
 from time import *
-ecart = 25
+ecart = 50
 celluleVivante = []
 
 def setup():
@@ -34,10 +34,10 @@ def countPos(lst):
     dict = {}
     for i, item in enumerate(lst):
         if item in dict:
-            dict[item].append(i)
+            dict[item]+=1
         else:
-            dict[item] = [i]
-    return {key: len(value) for key, value in dict.items()}
+            dict[item] = 1
+    return dict
 
 def rules(dict,cellule):
     lst = []
