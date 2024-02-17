@@ -53,8 +53,8 @@ def evolution():
     """ fonction a activer dans draw qui s'occupe de toute l'évolution avec les trois règles"""
     global celluleVivante, voisins
     voisins = []
-    for i in range(len(celluleVivante)):
-        add8voisins(celluleVivante[i])
+    for cell in celluleVivante:
+        add8voisins(cell)
     nouvelleCellule= rules(countPos(voisins),celluleVivante)
     celluleVivante = nouvelleCellule
 
