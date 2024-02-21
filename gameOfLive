@@ -3,11 +3,63 @@ from time import *
 ecart = 25
 celluleVivante = []
 
+class Patern:
+    def __init__(self,nom):
+        """donne si nested, sa largeur, hauteur, a code pour l'afficher, sous la forme d'une liste"""
+        self.nom = nom + ".rle"   #nom str du fichier ou ce citue le patern
+        self.nested = None
+        #any(isinstance(i, list) for i in a)
+
+
+    def extractPattern(self):
+        f = open(self.nom,"r")
+        s = ''
+        while True:
+            l = f.readline()
+            if l == '':             # Empty indicates end of file. An empty line would be '\n'
+                break
+            if l[0] =='#':
+                continue
+            if l[0] =='x':
+                continue
+            s = s + l[:-1]   # To remove EOL
+        f.close()
+        self.textPatern = s
+
+    def transformPatern(self):
+        lst = []
+        currentFloor = []
+        nbr = 1
+        for a in self.textPatern:
+            if a == "$":
+                lst.append([currentFloor])
+                currentFloor = []
+            elif a == 'b':
+                currentFloor.append(0 for _ in range(nbr))
+            elif a == 'o':
+                currentFloor.append(1 for _ in range(nbr))
+            else:
+                nbr = int(str(nbr)+a)
+        lst.append([currentFloor])
+        self.listPatern = lst
+        
+
+    def affPatern(self,posX,posY):
+        global ecart  
+        fill(0)
+        for j in range(len(self.listPatern)): #excicte aucun patern a une seule ligne donc deja prevoir double boucle
+            for i, cell in enumerate(self.listPatern):
+                if cell == 1:
+                    rect(multProche(posX + (i * ecart),ecart),multProche(posY + (j * ecart),ecart),ecart,ecart) 
+
 def setup():
-    global lancement
+    global lancement,testus
     size(800,800)
     fill(0)
     lancement = False
+    testus = Patern("test")
+    testus.extractPattern()
+    testus.transformPatern()
 
 def mouse_pressed():
     global celluleVivante, ecart
@@ -54,20 +106,13 @@ def evolution():
     nouvelleCellule= rules(countPos(voisins),celluleVivante)
     celluleVivante = nouvelleCellule
      
-def affPatern(lst,posX,posY,height):
-    global ecart  #peut etre creer fonction pour afficher des carres, les cellules vivantes
-    fill(0)
-    if height == 1:
-        for i, cell in enumerate(lst):
-            if cell == 1:
-                rect(posX + (i * ecart),posY,ecart,ecart) #prbl pas aligné avec le quadrillages donc -> creer fonction pour afficher cell alive mais que dans le quadrillage
+
     
 
 def draw():
-    global celluleVivante, ecart, lancement
+    global celluleVivante, ecart, lancement,testus
     background(255)
-    l = [1,0,0,1,0,1,0,1]
-    affPatern(l,mouse_x,mouse_y,1)
+    testus.affPatern(0,0)
     """if lancement == True:
         evolution()
         sleep(0.1)
