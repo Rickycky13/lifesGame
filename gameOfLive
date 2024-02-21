@@ -9,9 +9,6 @@ def setup():
     fill(0)
     lancement = False
 
-
-
-
 def mouse_pressed():
     global celluleVivante, ecart
     celluleVivante.append((multProche(mouse_x,ecart),multProche(mouse_y,ecart)))
@@ -32,7 +29,7 @@ def add8voisins(pos):
     
 def countPos(lst):
     dict = {}
-    for i, item in enumerate(lst):
+    for item in lst:
         if item in dict:
             dict[item]+=1
         else:
@@ -56,32 +53,22 @@ def evolution():
         add8voisins(cell)
     nouvelleCellule= rules(countPos(voisins),celluleVivante)
     celluleVivante = nouvelleCellule
-
-def readRLE(filename):
-    ''' Read the RLE file and returns a binary matrix '''
-    # see http://www.conwaylife.com/wiki/RLE 
-    
-    # Open file and cast it into a unique string
-    f = open(filename,"r")
-    s = ''
-    while True:
-        l = f.readline()
-        if l == '':             # Empty indicates end of file. An empty line would be '\n'
-            break
-        if l[0] =='#':
-            continue
-        if l[0] =='x':
-            continue
-        s = s + l[:-1]   # To remove EOL
-    f.close()
-    
-        
+     
+def affPatern(lst,posX,posY,height):
+    global ecart  #peut etre creer fonction pour afficher des carres, les cellules vivantes
+    fill(0)
+    if height == 1:
+        for i, cell in enumerate(lst):
+            if cell == 1:
+                rect(posX + (i * ecart),posY,ecart,ecart) #prbl pas aligné avec le quadrillages donc -> creer fonction pour afficher cell alive mais que dans le quadrillage
     
 
 def draw():
     global celluleVivante, ecart, lancement
     background(255)
-    if lancement == True:
+    l = [1,0,0,1,0,1,0,1]
+    affPatern(l,mouse_x,mouse_y,1)
+    """if lancement == True:
         evolution()
         sleep(0.1)
     elif lancement == False:
@@ -92,6 +79,6 @@ def draw():
         rect(celluleVivante[i][0],celluleVivante[i][1],ecart,ecart)
     if key == 'ENTER':
         lancement = not lancement
-        sleep(0.1)
+        sleep(0.1)"""
 
 run()
