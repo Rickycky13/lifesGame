@@ -112,8 +112,8 @@ def evolution():
 def draw():
     global celluleVivante, ecart, lancement,testus
     background(255)
-    testus.affPatern(0,0)
-    """if lancement == True:
+    #testus.affPatern(0,0)
+    if lancement == True:
         evolution()
         sleep(0.1)
     elif lancement == False:
@@ -124,6 +124,6 @@ def draw():
         rect(celluleVivante[i][0],celluleVivante[i][1],ecart,ecart)
     if key == 'ENTER':
         lancement = not lancement
-        sleep(0.1)"""
+        sleep(0.1)
 
 run()
