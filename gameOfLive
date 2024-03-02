@@ -10,17 +10,14 @@ def setup():
     size(800,800)
     fill(0)
     lancement = False
-    testus = Patern("test",ecart)
-    testus.extractPattern()
-    testus.transformPatern()
+    #testus = Patern("test",ecart)
+    #testus.extractPattern()
+    #testus.transformPatern()
+    #testus.addPatern(0,0,celluleVivante)
 
 
 ############################################################################################################################################################
 
-
-def mouse_pressed():
-    global celluleVivante, ecart
-    celluleVivante.append((multProche(mouse_x,ecart),multProche(mouse_y,ecart)))
 
 def multProche(val,mult):
     return (val//mult) * mult
@@ -62,21 +59,28 @@ def evolution():
         add8voisins(cell)
     nouvelleCellule= rules(countPos(voisins),celluleVivante)
     celluleVivante = nouvelleCellule
-     
-    
+
+def editeur():
+    global celluleVivante, ecart
+    if mouse_is_pressed:
+        celluleVivante.append((multProche(mouse_x,ecart),multProche(mouse_y,ecart)))
+        print(celluleVivante)
+        sleep(0.1)
+    fill(0,255,0)
+    rect(multProche(mouse_x,ecart),multProche(mouse_y,ecart),ecart,ecart)
+
+ 
 #####################################################################################################################################################################################
 
 
 def draw():
-    global celluleVivante, ecart, lancement,testus
+    global celluleVivante, ecart, lancement
     background(255)
     if lancement == True:
         evolution()
         sleep(0.1)
     elif lancement == False:
-        testus.addPatern(0,0,celluleVivante)
-        fill(0,255,0)
-        rect(multProche(mouse_x,ecart),multProche(mouse_y,ecart),ecart,ecart)
+        editeur()
     for i in range(len(celluleVivante)):
         fill(0)
         rect(celluleVivante[i][0],celluleVivante[i][1],ecart,ecart)

@@ -1,7 +1,7 @@
 class Patern:
     def __init__(self,nom,ecart):
         """donne si nested, sa largeur, hauteur, a code pour l'afficher, sous la forme d'une liste"""
-        self.nom = nom + ".rle"   #nom str du fichier ou ce citue le patern
+        self.nom = "rle/" + nom + ".rle"   #nom str du fichier ou ce citue le patern
         self.ecart = ecart
         #any(isinstance(i, list) for i in a)
 
