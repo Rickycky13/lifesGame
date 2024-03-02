@@ -70,7 +70,6 @@ def evolution():
 def draw():
     global celluleVivante, ecart, lancement,testus
     background(255)
-    #noLoop()
     if lancement == True:
         evolution()
         sleep(0.1)
