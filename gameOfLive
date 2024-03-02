@@ -1,65 +1,22 @@
 from p5 import *
 from time import *
+from classPatern import Patern
+
 ecart = 25
 celluleVivante = []
-
-class Patern:
-    def __init__(self,nom):
-        """donne si nested, sa largeur, hauteur, a code pour l'afficher, sous la forme d'une liste"""
-        self.nom = nom + ".rle"   #nom str du fichier ou ce citue le patern
-        self.nested = None
-        #any(isinstance(i, list) for i in a)
-
-
-    def extractPattern(self):
-        f = open(self.nom,"r")
-        s = ''
-        while True:
-            l = f.readline()
-            if l == '':             # Empty indicates end of file. An empty line would be '\n'
-                break
-            if l[0] =='#':
-                continue
-            if l[0] =='x':
-                continue
-            s = s + l[:-1]   # To remove EOL
-        f.close()
-        self.textPatern = s
-
-    def transformPatern(self):
-        lst = []
-        currentFloor = []
-        nbr = 1
-        for a in self.textPatern:
-            if a == "$":
-                lst.append([currentFloor])
-                currentFloor = []
-            elif a == 'b':
-                currentFloor.append(0 for _ in range(nbr))
-            elif a == 'o':
-                currentFloor.append(1 for _ in range(nbr))
-            else:
-                nbr = int(str(nbr)+a)
-        lst.append([currentFloor])
-        self.listPatern = lst
-        
-
-    def affPatern(self,posX,posY):
-        global ecart  
-        fill(0)
-        for j in range(len(self.listPatern)): #excicte aucun patern a une seule ligne donc deja prevoir double boucle
-            for i, cell in enumerate(self.listPatern):
-                if cell == 1:
-                    rect(multProche(posX + (i * ecart),ecart),multProche(posY + (j * ecart),ecart),ecart,ecart) 
 
 def setup():
     global lancement,testus
     size(800,800)
     fill(0)
     lancement = False
-    testus = Patern("test")
+    testus = Patern("test",ecart)
     testus.extractPattern()
     testus.transformPatern()
+
+
+############################################################################################################################################################
+
 
 def mouse_pressed():
     global celluleVivante, ecart
@@ -106,17 +63,19 @@ def evolution():
     nouvelleCellule= rules(countPos(voisins),celluleVivante)
     celluleVivante = nouvelleCellule
      
-
     
+#####################################################################################################################################################################################
+
 
 def draw():
     global celluleVivante, ecart, lancement,testus
     background(255)
-    testus.affPatern(0,0)
-    """if lancement == True:
+    #noLoop()
+    if lancement == True:
         evolution()
         sleep(0.1)
     elif lancement == False:
+        testus.addPatern(0,0,celluleVivante)
         fill(0,255,0)
         rect(multProche(mouse_x,ecart),multProche(mouse_y,ecart),ecart,ecart)
     for i in range(len(celluleVivante)):
@@ -124,6 +83,6 @@ def draw():
         rect(celluleVivante[i][0],celluleVivante[i][1],ecart,ecart)
     if key == 'ENTER':
         lancement = not lancement
-        sleep(0.1)"""
+        sleep(0.1)
 
 run()
