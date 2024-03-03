@@ -10,10 +10,10 @@ def setup():
     size(800,800)
     fill(0)
     lancement = False
-    #testus = Patern("test",ecart)
-    #testus.extractPattern()
-    #testus.transformPatern()
-    #testus.addPatern(0,0,celluleVivante)
+    testus = Patern(ecart,"gosperglidergun")
+    testus.extractPattern()
+    testus.transformPatern()
+    testus.addPatern(0,0,celluleVivante)
 
 
 ############################################################################################################################################################
@@ -64,7 +64,6 @@ def editeur():
     global celluleVivante, ecart
     if mouse_is_pressed:
         celluleVivante.append((multProche(mouse_x,ecart),multProche(mouse_y,ecart)))
-        print(celluleVivante)
         sleep(0.1)
     fill(0,255,0)
     rect(multProche(mouse_x,ecart),multProche(mouse_y,ecart),ecart,ecart)
