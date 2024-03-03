@@ -1,15 +1,21 @@
+"""il faut transformer ce ficher en utils (enlever setup et draw, ramner sur une fonction global)"""
+
+
 from p5 import *
-from time import *
+from time import sleep
 from classPatern import Patern
 
 ecart = 25
 celluleVivante = []
+lancement = False
+
+
+
 
 def setup():
-    global lancement,testus
+    global testus
     size(800,800)
     fill(0)
-    lancement = False
     testus = Patern(ecart,"gosperglidergun")
     testus.extractPattern()
     testus.transformPatern()
