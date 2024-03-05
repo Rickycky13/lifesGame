@@ -26,9 +26,11 @@ def editeur():
 
 def evolution():
     global celluleVivante, rule
-    for a in ord(rule)[2:]:
+    for a in bin(rule)[2:]:
         if i == 1:
             pass
+            #rule[i]() ?
+
 
 def rule0():
     #000
