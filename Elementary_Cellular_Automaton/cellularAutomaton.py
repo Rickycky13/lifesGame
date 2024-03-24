@@ -9,60 +9,56 @@ etage = 0
 rule = 110
 print(bin(rule)[2:])
 
-def resolution():
-    """metttre une pop up pour que l'utilisateur choissise la resolution de son ecran"""
-    pass
+def rule0(lst):
+    #000
+    print("0")
+
+def rule1():
+    #001
+    print("0")
+
+def rule2():
+    #010
+    print("0")
+
+def rule3():
+    #011
+    print("0")
+
+def rule4():
+    #100
+    print("0")
+
+def rule5():
+    #101
+    print("0")
+
+def rule6():
+    #110
+    print("0")
+
+def rule7():
+    #111
+    print("0")
+
+rules = [rule0,rule1,rule2,rule3,rule4,rule5,rule6,rule7]
 
 def multProche(val,mult):
     return (val//mult) * mult
 
 def editeur():
-    global ecart, etage
+    global ecart
     if mouse_is_pressed:
-        celluleVivante.append((multProche(mouse_x,ecart),etage * ecart))
+        celluleVivante.append((multProche(mouse_x,ecart),0))
         sleep(0.1)
     fill(0,255,0)
-    rect(multProche(mouse_x,ecart),etage * ecart,ecart,ecart)
+    rect(multProche(mouse_x,ecart),0,ecart,ecart)
 
 def evolution():
-    global celluleVivante, rule
-    for a in bin(rule)[2:]:
-        if i == 1:
-            pass
-            #rule[i]() ?
-
-
-def rule0():
-    #000
-    pass
-
-def rule1():
-    #001
-    pass
-
-def rule2():
-    #010
-    pass
-
-def rule3():
-    #011
-    pass
-
-def rule4():
-    #100
-    pass
-
-def rule5():
-    #101
-    pass
-
-def rule6():
-    #110
-    pass
-
-def rule7():
-    #111
-    pass
+    global celluleVivante, rule, rules
+    for i,a in enumerate(bin(rule)[2:]):
+        if a == "1":
+            rules[i]() 
 
 def setup():
     size(800,800)
@@ -79,8 +75,6 @@ def draw():
         lancement = not lancement
         evolution()
         sleep(0.1)
-        etage += 1 #changer a la fin des fonctions d'évolution, augmenter etage
-        lancement = not lancement
 
 
 

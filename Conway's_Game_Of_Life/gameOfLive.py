@@ -3,7 +3,7 @@
 
 from p5 import *
 from time import sleep
-from classPatern import Patern
+#from classPatern import Patern
 
 ecart = 25
 celluleVivante = []
