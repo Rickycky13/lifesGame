@@ -1,45 +1,76 @@
 from p5 import *
 from time import sleep
 
-celluleVivante = []
-ancienneCellule = []
+celluleVivante = {}
 ecart = 50
 lancement = False
 etage = 0
-rule = 110
+rule = 255
 print(bin(rule)[2:])
 
-def rule0(lst):
+def rule0(dico):
     #000
-    print("0")
+    newDico = {}
+    for clef in dico.keys():
+        if dico[clef] == 0 and dico[clef - ecart] == 0 and dico[clef + ecart] == 0:
+            newDico[clef] == 1
+    return newDico
 
-def rule1():
+def rule1(dico):
     #001
-    print("0")
+    newDico = {}
+    for clef in dico.keys():
+        if dico[clef] == 0 and dico[clef - ecart] == 0 and dico[clef + ecart] == 1:
+            newDico[clef] == 1
+    return newDico
 
-def rule2():
+def rule2(dico):
     #010
-    print("0")
+    newDico = {}
+    for clef in dico.keys():
+        if dico[clef] == 1 and dico[clef - ecart] == 0 and dico[clef + ecart] == 0:
+            newDico[clef] == 1
+    return newDico
 
-def rule3():
+def rule3(dico):
     #011
-    print("0")
+    newDico = {}
+    for clef in dico.keys():
+        if dico[clef] == 1 and dico[clef - ecart] == 0 and dico[clef + ecart] == 1:
+            newDico[clef] == 1
+    return newDico
 
-def rule4():
+def rule4(dico):
     #100
-    print("0")
+    newDico = {}
+    for clef in dico.keys():
+        if dico[clef] == 0 and dico[clef - ecart] == 1 and dico[clef + ecart] == 0:
+            newDico[clef] == 1
+    return newDico
 
-def rule5():
+def rule5(dico):
     #101
-    print("0")
+    newDico = {}
+    for clef in dico.keys():
+        if dico[clef] == 0 and dico[clef - ecart] == 1 and dico[clef + ecart] == 1:
+            newDico[clef] == 1
+    return newDico
 
-def rule6():
+def rule6(dico):
     #110
-    print("0")
+    newDico = {}
+    for clef in dico.keys():
+        if dico[clef] == 1 and dico[clef - ecart] == 1 and dico[clef + ecart] == 0:
+            newDico[clef] == 1
+    return newDico
 
-def rule7():
+def rule7(dico):
     #111
-    print("0")
+    newDico = {}
+    for clef in dico.keys():
+        if dico[clef] == 1 and dico[clef - ecart] == 1 and dico[clef + ecart] == 1:
+            newDico[clef] == 1
+    return newDico
 
 rules = [rule0,rule1,rule2,rule3,rule4,rule5,rule6,rule7]
 
@@ -49,31 +80,36 @@ def multProche(val,mult):
 def editeur():
     global ecart
     if mouse_is_pressed:
-        celluleVivante.append((multProche(mouse_x,ecart),0))
+        celluleVivante[multProche(mouse_x,ecart)] = 1
         sleep(0.1)
     fill(0,255,0)
     rect(multProche(mouse_x,ecart),0,ecart,ecart)
 
 def evolution():
     global celluleVivante, rule, rules
+    newCell = {}
     for i,a in enumerate(bin(rule)[2:]):
         if a == "1":
-            rules[i]() 
+            newCell += rules[i](celluleVivante)
 
 def setup():
     size(800,800)
+    for i in range(0,1080,ecart):
+        celluleVivante[i] = 0
 
 def draw():
     global celluleVivante,lancement, etage
     background(255)
     if lancement == False:
         editeur()
-    for i in range(len(celluleVivante)):
-        fill(0)
-        rect(celluleVivante[i][0],celluleVivante[i][1],ecart,ecart)
+    for clef in celluleVivante.keys():
+        if celluleVivante[clef] == 1:
+            fill(0)
+            rect(clef,etage,ecart,ecart)
     if key == 'ENTER':
         lancement = not lancement
         evolution()
+        etage += ecart
         sleep(0.1)
 
 

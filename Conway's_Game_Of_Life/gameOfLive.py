@@ -3,7 +3,6 @@
 
 from p5 import *
 from time import sleep
-#from classPatern import Patern
 
 ecart = 25
 celluleVivante = []
@@ -16,10 +15,6 @@ def setup():
     global testus
     size(800,800)
     fill(0)
-    testus = Patern(ecart,"gosperglidergun")
-    testus.extractPattern()
-    testus.transformPatern()
-    testus.addPatern(0,0,celluleVivante)
 
 
 ############################################################################################################################################################
